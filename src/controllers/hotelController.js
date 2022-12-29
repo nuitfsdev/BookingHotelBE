@@ -2,7 +2,14 @@ const Hotel = require('../models/hotel');
 
 exports.getAllHotel=async(req,res)=>{
     try{
-        const hotels= await Hotel.find();
+        let filter={}
+        if(req.query.uudai){
+            filter.uudai=req.query.uudai
+        }
+        if(req.query.noibat){
+            filter.noibat=req.query.noibat
+        }
+        const hotels= await Hotel.find(filter);
         res.send(hotels)
     }catch(e){
         res.status(500).send(e)

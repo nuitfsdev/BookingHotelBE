@@ -68,6 +68,10 @@ const hotelSchema=new mongoose.Schema({
         type: String,
         require: true
     },
+    map: {
+        type: String,
+        require: true
+    },
     kieudat: {
         type: Array
     }
