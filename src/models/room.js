@@ -10,6 +10,11 @@ const roomSchema=new mongoose.Schema({
         required: true,
         trim: true,
     },
+    tenphong: {
+        type: String,
+        required: true,
+        trim: true,
+    },
     loaiphong: {
         type: String,
         required: true,
@@ -27,7 +32,6 @@ const roomSchema=new mongoose.Schema({
     soluong: {
         type: Number,
         required: true,
-        trim: true,
     },
     tinhtrang: {
         type: Boolean,
