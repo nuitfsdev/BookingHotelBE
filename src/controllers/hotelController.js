@@ -9,6 +9,9 @@ exports.getAllHotel=async(req,res)=>{
         if(req.query.noibat){
             filter.noibat=req.query.noibat
         }
+        if(req.query.tenht){
+            filter.tenht={ "$regex": req.query.tenht, "$options": "i" }
+        }
         const hotels= await Hotel.find(filter);
         res.send(hotels)
     }catch(e){
