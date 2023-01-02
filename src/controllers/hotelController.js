@@ -12,6 +12,9 @@ exports.getAllHotel=async(req,res)=>{
         if(req.query.tenht){
             filter.tenht={ "$regex": req.query.tenht, "$options": "i" }
         }
+        if(req.query.maht){
+            filter.maht=req.query.maht
+        }
         const hotels= await Hotel.find(filter);
         res.send(hotels)
     }catch(e){
