@@ -28,10 +28,15 @@ const hotelSchema=new mongoose.Schema({
         type: Number,
         required: true,
     },
-    tienich: {
-        type: Array,
-        required: true,
-    },
+    tienichs: [{
+        tienich:{
+            type: String,
+        }
+    }],
+    // tienich: {
+    //     type: Array,
+    //     required: true,
+    // },
     mota: {
         type: String,
         required: true,

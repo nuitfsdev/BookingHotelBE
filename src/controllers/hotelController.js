@@ -15,7 +15,19 @@ exports.getAllHotel=async(req,res)=>{
         if(req.query.maht){
             filter.maht=req.query.maht
         }
-        const hotels= await Hotel.find(filter);
+        if(req.query.giamin){
+            filter.giamin={ $gte: req.query.giamin }
+        }
+        if(req.query.giamax){
+            filter.giamax={ $lte: req.query.giamax }
+        }
+        let hotels= await Hotel.find(filter);
+        if(req.query.sosao){
+             hotels= hotels.where('sosao').in(req.query.sosao);
+        }
+        if(req.query.tienich){
+            hotels=hotels.where('tienichs.tienich').in(req.query.tienich);
+        }
         res.send(hotels)
     }catch(e){
         res.status(500).send(e)
