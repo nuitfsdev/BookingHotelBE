@@ -22,12 +22,22 @@ exports.getAllHotel=async(req,res)=>{
             filter.giamax={ $lte: req.query.giamax }
         }
         let hotels= await Hotel.find(filter);
+        if(req.query.tienichs){
+            // console.log(req.query.tienichs)
+            hotels= await Hotel.find(filter).where('tienichs.tienich').in(req.query.tienichs);
+            // console.log(hotels)
+        }
         if(req.query.sosao){
-             hotels= hotels.where('sosao').in(req.query.sosao);
+            //console.log(req.query.sosao)
+
+            hotels=hotels.filter((e)=>{
+                console.log(e.sosao)
+                return req.query.sosao.includes(e.sosao.toString())
+            })
+            // console.log(hotels)
+
         }
-        if(req.query.tienich){
-            hotels=hotels.where('tienichs.tienich').in(req.query.tienich);
-        }
+        // console.log(req.query)
         res.send(hotels)
     }catch(e){
         res.status(500).send(e)
