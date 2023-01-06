@@ -99,8 +99,8 @@ exports.forgotPassword=async(req,res)=>{
         if(!user){
             return res.status(404).send("Email not exists")
         }
-        let randomCode=Math.floor(Math.random()*1000000)+1;
-        console.log(Math.floor(Math.random()*1000000)+1)
+        let randomCode=Math.floor(Math.random()*1000000);
+        console.log(Math.floor(Math.random()*1000000))
         user.verifyCode=randomCode.toString();
         await user.save()
         const sendEmail=emails.resetPasswordEmail(email,randomCode)
