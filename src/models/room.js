@@ -37,10 +37,14 @@ const roomSchema=new mongoose.Schema({
         type: Boolean,
         default: true
     },
-    tienich: {
-        type: Array,
-        required: true,
-    },
+    tienichs: [{
+        tienich:{
+            type: String,
+        },
+        hinh:{
+            type: String,
+        }
+    }],
     mota: {
         type: String,
         required: true,
