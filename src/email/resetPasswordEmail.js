@@ -18,7 +18,7 @@ exports.resetPasswordEmail=(email,randomCode)=>{
         subject: "Booking Hotel: Quên mật khẩu", 
         text: "Quên mật khẩu?", 
         html: `<h2>Booking Hotel xin kính chào quý khách!</h2>
-               <p>Để đổi lại mật khẩu cho tài khoản của quý khách. Vùi lòng nhấn vào nút bên dưới để thực hiện đổi mật khẩu!</p>
+               <p>Để đổi lại mật khẩu cho tài khoản của quý khách. Vùi lòng nhập mã code bên dưới vào ô xác thực để thực hiện đổi mật khẩu!</p>
                 <h1 style="margin-left: 150px;">${randomCode}</h1>
                <p>Nếu quý khách không thực hiện yêu cầu này! Xin quý khách vui lòng bỏ qua email này.</p>
                <h3>Cảm ơn quý khách đã tin tưởng và sử dụng dịch vụ của Booking Hotel!</h3>`
