@@ -117,21 +117,28 @@ exports.forgotPassword=async(req,res)=>{
         res.status(500).send(e)
     }
 }
-// exports.resetPassword=async(req,res)=>{
-//     try{
-//         const token=req.header('Authorization').replace('Bearer ','')
-//         const decode=jwt.verify(token,process.env.JWT_SECRET)
-//         if(!decode){
-//             throw new Error("Token is expired or wrong")
-//         }
-//         const user= await User.findOne({_id: decode._id, verifyToken: token})
-//         if(!user){
-//             return res.status(400).send("User not exist")
-//         }
-//         user.password=req.body.password
-//         await user.save()
-//         res.status(200).send(user)
-//     } catch(e){
-//         res.status(500).send(e.message)
-//     }
-// }
+exports.confirmCode=async(req,res)=>{
+    try{
+        const user= await User.findOne({email: req.body.email, verifyCode: req.body.verifyCode})
+        if(!user){
+            return res.status(400).send("Error verify code")
+        }
+        res.status(200).send(user)
+    } catch(e){
+        res.status(500).send(e.message)
+    }
+}
+exports.resetPassword=async(req,res)=>{
+    try{
+        const user= await User.findOne({email: req.body.email, verifyCode: req.body.verifyCode})
+        if(!user){
+            return res.status(400).send("User not exist")
+        }
+        user.password=req.body.password
+        user.verifyCode="";
+        await user.save()
+        res.status(200).send(user)
+    } catch(e){
+        res.status(500).send(e.message)
+    }
+}

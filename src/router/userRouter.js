@@ -11,7 +11,9 @@ router.post('/users/logoutAll', auth, userController.logoutAll)
 router.put('/users/me',auth, userController.updateMe)
 router.delete('/users/me',auth, userController.deleteMe)
 router.post('/users/forgotPassword', userController.forgotPassword)
-// router.post('/users/resetPassword', userController.resetPassword)
+router.post('/users/confirmCode', userController.confirmCode)
+router.post('/users/resetPassword', userController.resetPassword)
+
 
 // router.put('/users/role',authAd, async(req,res)=>{
 //     const updates=Object.keys(req.body)
