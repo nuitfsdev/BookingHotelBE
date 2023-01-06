@@ -15,14 +15,13 @@ exports.resetPasswordEmail=(email,randomCode)=>{
     transporter.sendMail({
         from: process.env.USERMAIL, 
         to: `${email}`, 
-        subject: "KingSpeed: Quên mật khẩu", 
+        subject: "Booking Hotel: Quên mật khẩu", 
         text: "Quên mật khẩu?", 
-        html: `<h2>King Speed xin kính chào quý khách!</h2>
+        html: `<h2>Booking Hotel xin kính chào quý khách!</h2>
                <p>Để đổi lại mật khẩu cho tài khoản của quý khách. Vùi lòng nhấn vào nút bên dưới để thực hiện đổi mật khẩu!</p>
-
-               <h6 style="margin-left: 100px ; color: red;">Email này chỉ có hiệu lực trong vòng 20 phút!</h6>
+                <h1 style="margin-left: 150px;">${randomCode}<h1>
                <p>Nếu quý khách không thực hiện yêu cầu này! Xin quý khách vui lòng bỏ qua email này.</p>
-               <h3>Cảm ơn quý khách đã tin tưởng và sử dụng dịch vụ của King Speed!</h3>`
+               <h3>Cảm ơn quý khách đã tin tưởng và sử dụng dịch vụ của Booking Hotel!</h3>`
         });
     return true
     }catch(e){
