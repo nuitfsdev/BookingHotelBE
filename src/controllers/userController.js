@@ -4,6 +4,8 @@ const User=require('../models/user')
 const auth=require('../middleware/auth')
 const nodemailer = require("nodemailer");
 const jwt=require('jsonwebtoken');
+const emails=require('../email/resetPasswordEmail')
+
 
 exports.getUserMe=async(req,res)=>{
     try{
@@ -90,30 +92,31 @@ exports.deleteMe=async(req,res)=>{
         res.status(500).send(e)
     }
 }
-// exports.forgotPassword=async(req,res)=>{
-//     try{
-//         const email=req.body.email
-//         const user= await User.findOne({email: email})
-//         if(!user){
-//             return res.status(404).send("Email not exists")
-//         }
-//         const token=jwt.sign({_id: user._id.toString(), role: user.role}, process.env.JWT_SECRET,{expiresIn: '20m'})
-//         user.verifyToken=token
-//         await user.save()
-//         const sendEmail=emails.resetPasswordEmail(email,token)
-//         if(!sendEmail){
-//             return res.send({
-//                 message: `Không thể gửi mail đến ${email}`,
-//                 err
-//             }).status(400)
-//         }
-//         return res.send({
-//             message: `Đã gửi thành công cho ${email}`
-//         })
-//     }catch(e){
-//         res.status(500).send(e)
-//     }
-// }
+exports.forgotPassword=async(req,res)=>{
+    try{
+        const email=req.body.email
+        const user= await User.findOne({email: email})
+        if(!user){
+            return res.status(404).send("Email not exists")
+        }
+        let randomCode=Math.floor(Math.random()*1000000)+1;
+        console.log(Math.floor(Math.random()*1000000)+1)
+        user.verifyCode=randomCode.toString();
+        await user.save()
+        const sendEmail=emails.resetPasswordEmail(email,randomCode)
+        if(!sendEmail){
+            return res.send({
+                message: `Không thể gửi mail đến ${email}`,
+                err
+            }).status(400)
+        }
+        return res.send({
+            message: `Đã gửi thành công cho ${email}`
+        })
+    }catch(e){
+        res.status(500).send(e)
+    }
+}
 // exports.resetPassword=async(req,res)=>{
 //     try{
 //         const token=req.header('Authorization').replace('Bearer ','')
