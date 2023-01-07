@@ -3,17 +3,68 @@ const Room = require('../models/room');
 
 exports.getAllRoom=async(req,res)=>{
     try{
+        let filterHotel={}
+        if(req.query.tinh){
+            filterHotel.tinh=req.query.tinh
+        }
+        if(req.query.quan){
+            filterHotel.quan=req.query.quan
+        }
+        let hotels= await Hotel.find({filterHotel})
+        if(req.query.sosao){
+            hotels= await Hotel.find(filterHotel).where('sosao').in(req.query.sosao);   
+        }
+        let listmaht=[];
+        for(var item of hotels){
+            listmaht.push(item.maht)
+        }
+        if(listmaht.length==0){
+            return res.send({})
+        }
         let filter={}
+        if(req.query.uudai){
+            filter.uudai=req.query.uudai
+        }
+        if(req.query.noibat){
+            filter.noibat=req.query.noibat
+        }
         if(req.query.maht){
             filter.maht=req.query.maht
         }
+        if(req.query.giamin && req.query.giamax){
+            filter.giangay={$gte: req.query.giamin, $lte: req.query.giamax}
+        }
+        if(req.query.sogiuong){
+            filter.sogiuong=req.query.sogiuong
+        }
+        if(req.query.tinhtrang){
+            filter.tinhtrang=req.query.tinhtrang
+        }
+        let rooms= await Room.find(filter);
+        if(req.query.tienichs){
+            // console.log(req.query.tienichs)
+            rooms= await Room.find(filter).where('tienichs.tienich').in(req.query.tienichs);
+            // console.log(hotels)
+        }
+        if(req.query.loaiphong){
+            rooms=rooms.filter((e)=>{
+                return req.query.loaiphong.includes(e.loaiphong)
+            })
+        }
+        if(listmaht.length!==0){
+            rooms=rooms.filter((e)=>{
+                return listmaht.includes(e.maht)
+            })
+        }
+        // if(req.query.maht){
+        //     filter.maht=req.query.maht
+        // }
         // if(req.query.noibat){
         //     filter.noibat=req.query.noibat
         // }
-        const rooms= await Room.find(filter);
         res.send(rooms)
     }catch(e){
-        res.status(500).send(e)
+        res.status(500).send(e.message)
     }  
 }
 
