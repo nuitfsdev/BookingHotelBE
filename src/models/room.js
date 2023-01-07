@@ -60,6 +60,11 @@ const roomSchema=new mongoose.Schema({
         required: true,
         trim: true,
     },
+    giagio2: {
+        type: Number,
+        default: 50000,
+        required: true,
+    },
     giangay: {
         type: Number,
         required: true,
