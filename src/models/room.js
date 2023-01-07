@@ -25,6 +25,12 @@ const roomSchema=new mongoose.Schema({
         required: true,
         trim: true,
     },
+    loaigiuong: {
+        type: String,
+        default: "Giường đôi",
+        required: true,
+        trim: true,
+    },
     sogiuong: {
         type: Number,
         require: true
