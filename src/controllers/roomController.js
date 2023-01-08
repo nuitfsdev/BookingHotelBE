@@ -19,7 +19,7 @@ exports.getAllRoom=async(req,res)=>{
             listmaht.push(item.maht)
         }
         if(listmaht.length==0){
-            return res.send({})
+            return res.send([])
         }
         let filter={}
         if(req.query.uudai){
