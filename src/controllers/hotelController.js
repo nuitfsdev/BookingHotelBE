@@ -13,7 +13,7 @@ exports.getAllHotel=async(req,res)=>{
             filter.tinh=req.query.tinh
         }
         if(req.query.quan){
-            filter.huyen=req.query.quan
+            filter.quan=req.query.quan
         }
         if(req.query.tenht){
             filter.tenht={ "$regex": req.query.tenht, "$options": "i" }
