@@ -56,6 +56,10 @@ const roomSchema=new mongoose.Schema({
         required: true,
         trim: true,
     },
+    tinhtrang: {
+        type: String,
+        default: "còn phòng"
+    },
     hinh:{
         type: Array,
         required: true,
@@ -65,7 +69,7 @@ const roomSchema=new mongoose.Schema({
         type: Number,
         required: true,
         trim: true,
-    },
+    },  
     giagio2: {
         type: Number,
         default: 50000,
@@ -75,6 +79,18 @@ const roomSchema=new mongoose.Schema({
         type: Number,
         required: true,
         trim: true,
+    },
+    giatreem: {
+        type: Number,
+        default: 500000
+    },
+    slnguoilon: {
+        type: Number,
+        default: 2
+    },
+    sltreem: {
+        type: Number,
+        default: 2
     },
     uudai: {
         type: Boolean,
