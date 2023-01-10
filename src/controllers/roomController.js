@@ -22,6 +22,9 @@ exports.getAllRoom=async(req,res)=>{
             return res.send([])
         }
         let filter={}
+        if(req.query.maroom){
+            filter.maroom=req.query.maroom
+        }
         if(req.query.uudai){
             filter.uudai=req.query.uudai
         }
