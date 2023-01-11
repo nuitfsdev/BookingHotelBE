@@ -5,10 +5,10 @@ exports.getAllRoom=async(req,res)=>{
     try{
         let filterHotel={}
         if(req.query.tinh){
-            filterHotel.tinh=req.query.tinh
+            filterHotel.tinh={ "$regex": req.query.tinh, "$options": "i" }
         }
         if(req.query.quan){
-            filterHotel.quan=req.query.quan
+            filterHotel.quan={ "$regex": req.query.quan, "$options": "i" }
         }
         let hotels= await Hotel.find({filterHotel})
         if(req.query.sosao){
