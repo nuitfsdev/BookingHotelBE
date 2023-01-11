@@ -15,7 +15,7 @@ exports.getAllHotel=async(req,res)=>{
     try{
         const loves= await Love.findOne({makh: req.query.makh})
         if(!loves){
-            return res.status(404).send([]);
+            return res.status(200).send([]);
         }
         let listHotel=[]
         for(var item of loves.maht)
@@ -33,7 +33,7 @@ exports.getAllRoom=async(req,res)=>{
     try{
         const loves= await Love.findOne({makh: req.query.makh})
         if(!loves){
-            return res.status(404).send([])
+            return res.status(200).send([])
         }
         let listRoom=[]
         for(var item of loves.maroom)
