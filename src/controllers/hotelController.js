@@ -10,10 +10,10 @@ exports.getAllHotel=async(req,res)=>{
             filter.noibat=req.query.noibat
         }
         if(req.query.tinh){
-            filter.tinh=req.query.tinh
+            filter.tinh={ "$regex": req.query.tinh, "$options": "i" }
         }
         if(req.query.quan){
-            filter.quan=req.query.quan
+            filter.quan={ "$regex": req.query.quan, "$options": "i" }
         }
         if(req.query.tenht){
             filter.tenht={ "$regex": req.query.tenht, "$options": "i" }
