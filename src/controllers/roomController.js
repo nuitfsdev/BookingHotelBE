@@ -10,13 +10,14 @@ exports.getAllRoom=async(req,res)=>{
         if(req.query.quan){
             filterHotel.quan={ "$regex": req.query.quan, "$options": "i" }
         }
-        let hotels= await Hotel.find({filterHotel})
+        let hotels= await Hotel.find(filterHotel)
         if(req.query.sosao){
             hotels= await Hotel.find(filterHotel).where('sosao').in(req.query.sosao);   
         }
         let listmaht=[];
         for(var item of hotels){
             listmaht.push(item.maht)
+            console.log(item.maht)
         }
         if(listmaht.length==0){
             return res.send([])
