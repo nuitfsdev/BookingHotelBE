@@ -82,7 +82,7 @@ const roomSchema=new mongoose.Schema({
     },
     giatreem: {
         type: Number,
-        default: 500000
+        default: 50000
     },
     slnguoilon: {
         type: Number,
