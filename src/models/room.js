@@ -56,10 +56,6 @@ const roomSchema=new mongoose.Schema({
         required: true,
         trim: true,
     },
-    tinhtrang: {
-        type: String,
-        default: "còn phòng"
-    },
     hinh:{
         type: Array,
         required: true,
