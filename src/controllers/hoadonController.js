@@ -19,7 +19,7 @@ exports.getAllHoadons=async(req,res)=>{
         if(req.query.makh){
             filter.makh=req.query.makh
         }
-        const hoadons= await HoaDon.find(filter)
+        const hoadons= await HoaDon.find(filter).sort({createdAt: -1})
         res.send(hoadons)
     }catch(e){
         res.status(500).send(e)
