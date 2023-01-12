@@ -2,6 +2,9 @@ const express=require('express')
 const router=new express.Router()
 const HoaDon=require('../models/hoadon')
 const User = require('../models/user')
+const emails=require('../email/invoiceEmail')
+const Hotel = require('../models/hotel');
+
 // const order=require('../email/orderEmail')
 // const invoice=require('../email/invoiceEmail')
 
@@ -91,6 +94,23 @@ exports.updateHoadon=async(req,res)=>{
         updates.forEach((update)=>{
             hoadon[update]=req.body[update]
         })
+        await hoadon.save()
+        if(req.body.tinhtrang=="Thành công"){
+            const user= await User.findOne({mauser: hoadon.makh})
+            const hotel= await Hotel.findOne({maht: hoadon.maht})
+            const room= await Hotel.findOne({maroom: hoadon.maroom})
+            const sendEmail=emails.invoiceEmail(user.email,hoadon,hotel,room);
+            if(!sendEmail){
+                return res.send({
+                    message: `Không thể gửi mail đến ${user.email}`,
+                    err
+                }).status(400)
+            }
+            return res.send({
+                message: `Đã gửi thành công cho ${user.email}`
+            })
+
+        }
         // const khachhang=await User.findOne({mauser: hoadon.makh})
         // const cthds=await CTHD.find({mahd: hoadon.mahd})
         // const sendEmail=await invoice.invoiceEmail(khachhang.email,hoadon,cthds)
@@ -98,7 +118,6 @@ exports.updateHoadon=async(req,res)=>{
         // {
         //     return res.status(400).send("Can not send invoice email")
         // }
-        await hoadon.save()
         res.send(hoadon)
     } catch(e){
         res.status(500).send(e.message)  
