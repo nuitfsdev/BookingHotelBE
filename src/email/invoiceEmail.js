@@ -89,7 +89,7 @@ exports.invoiceEmail=async(email,hoadon,hotel,room)=>{
             </tr>
             <tr>
                 <th style="text-align:left">Ngân hàng thanh toán: </th>
-                <td>${hoadon.nganhang}</td>
+                <td>${hoadon.nganhang!=null?hoadon.nganhang:""}</td>
             </tr>
         </table>
         <h4 style="color: #0b3c86;">Tổng tiền: ${hoadon.trigia.toLocaleString()} VNĐ</h4>
