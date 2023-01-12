@@ -80,6 +80,10 @@ exports.invoiceEmail=async(email,hoadon,hotel,room)=>{
                 <td>${hoadon.gia.toLocaleString()} VNĐ</td>
             </tr>
             <tr>
+                <th style="text-align:left">Giảm giá: </th>
+                <td>giảm ${hotel.giamgia}% VNĐ</td>
+            </tr>
+            <tr>
                 <th style="text-align:left">Hình thức thanh toán: </th>
                 <td>${hoadon.phuongthuc}</td>
             </tr>

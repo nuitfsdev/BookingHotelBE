@@ -4,6 +4,7 @@ const HoaDon=require('../models/hoadon')
 const User = require('../models/user')
 const emails=require('../email/invoiceEmail')
 const Hotel = require('../models/hotel');
+const Room = require('../models/room')
 
 // const order=require('../email/orderEmail')
 // const invoice=require('../email/invoiceEmail')
@@ -98,7 +99,7 @@ exports.updateHoadon=async(req,res)=>{
         if(req.body.tinhtrang=="Thành công"){
             const user= await User.findOne({mauser: hoadon.makh})
             const hotel= await Hotel.findOne({maht: hoadon.maht})
-            const room= await Hotel.findOne({maroom: hoadon.maroom})
+            const room= await Room.findOne({maroom: hoadon.maroom})
             const sendEmail=emails.invoiceEmail(user.email,hoadon,hotel,room);
             if(!sendEmail){
                 return res.send({
